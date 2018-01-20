@@ -6,19 +6,18 @@ import matplotlib.pyplot as plt
 
 
 def dot_h5_make(dot_h_path, img_path):
-    # dot_h_path: save location for the .h file
+    # dot_h_path: save location for the .h file eg: '/home/.../dataset.h5'
     # img_dir_path: images path for build the dataset
 
     # read addresses and labels from the 'train' folder
     addrs = glob.glob(img_path)
-    labels = [0 if 'bellpepper' in addr else 1 if 'bokchoy' in addr else 2 if 'gherkins' in addr else 3 for addr in
-              addrs]  # 0 = bellpepper, 1 = bokchoy, 2 = , 3 = , 4 =
+    labels = [0 if 'cat' in addr else 1 if 'dog' in addr else 2 if 'fish' in addr else 3 for addr in
+              addrs]  # 0 = cat, 1 = dog, 2 = fish, 3 = bird, what should be the output for each image. 
 
     train_addrs = addrs[0:int(1 * len(addrs))]
     train_y = labels[0:int(1 * len(labels))]
 
     # crate h5 file with tables
-    # data_order = 'tf'  # 'th' for Theano, 'tf' for Tensorflow
     # check the order of data and chose proper data shape to save images
     train_shape = (len(train_addrs), 227, 227, 3)
     # open a hdf5 file and create earrays
